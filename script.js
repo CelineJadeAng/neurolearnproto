@@ -1,12 +1,5 @@
-/* script.js - Merged Logic with Sync & Chatbot Features */
-
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ==========================================
-    // PART 1: MOODLE DASHBOARD LOGIC (ACCORDIONS)
-    // ==========================================
-
-    // 1. SELECT ALL TOPIC HEADERS
     const headers = document.querySelectorAll('.topic-header');
     
     if (headers.length > 0) {
@@ -26,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 2. HANDLE "COLLAPSE ALL" / "EXPAND ALL"
     const collapseLink = document.querySelector('.collapse-link');
     if (collapseLink) {
         collapseLink.addEventListener('click', function(e) {
@@ -48,16 +40,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ==========================================
-    // PART 2: SYNC LOGIC (CHECKING LOCALSTORAGE)
-    // ==========================================
-
-    // A. Check if on Moodle Dashboard (dashboard.html)
     if (window.location.pathname.includes('dashboard.html')) {
         const syncStatus = localStorage.getItem('neuro_progress');
         if (syncStatus === '100') {
             const ltiLink = document.querySelector('.lti-link-row');
-            // If the link exists, append a "Grade" badge
             if (ltiLink && !document.querySelector('.grade-badge')) {
                 const badge = document.createElement('div');
                 badge.className = 'grade-badge';
@@ -68,15 +54,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // B. Check if on NeuroLearn Dashboard (neurolearn.html)
     if (window.location.pathname.includes('neurolearn.html')) {
         const syncStatus = localStorage.getItem('neuro_progress');
         
-        // Update the Neuroscience Card if completed
         if (syncStatus === '100') {
             const neuroCard = document.getElementById('deck-neuroscience');
             if (neuroCard) {
-                // Update progress bar visuals
                 const fill = neuroCard.querySelector('.progress-fill');
                 if(fill) fill.style.width = '100%';
                 
@@ -91,31 +74,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Check if a NEW deck was generated
         const newDeckCreated = localStorage.getItem('new_deck_created');
         if (newDeckCreated === 'true') {
             const genDeck = document.getElementById('deck-generated');
-            if(genDeck) genDeck.style.display = 'block'; // Show hidden deck
+            if(genDeck) genDeck.style.display = 'block';
         }
     }
 
-    // ==========================================
-    // PART 3: FLASHCARD PAGE INITIALIZATION
-    // ==========================================
     if (document.getElementById('main-flashcard')) {
-        // Determine which deck to load based on filename
         if (window.location.pathname.includes('flashcard-generated.html')) {
-            loadCard(0, generatedFlashcardData); // Load JS Deck
+            loadCard(0, generatedFlashcardData);
         } else {
-            loadCard(0, flashcardData); // Load Neuro Deck
+            loadCard(0, flashcardData);
         }
     }
 });
-
-
-// ==========================================
-// PART 4: NAVIGATION & LOGIN FUNCTIONS
-// ==========================================
 
 function fakeLogin(e) {
     e.preventDefault();
@@ -130,11 +103,9 @@ function fakeLogin(e) {
 }
 
 function launchApp() {
-  
     window.open("neurolearn.html", "_blank");
 }
 
-// Used in Modal Logic
 function openGenerator() { document.getElementById('generator-modal').style.display = 'flex'; }
 function closeGenerator() { document.getElementById('generator-modal').style.display = 'none'; }
 
@@ -146,14 +117,40 @@ function runGeneration() {
     }
     
     setTimeout(() => {
-        // OLD: window.location.href = 'flashcard-generated.html';
-        
-        // NEW: Go to Assessment Page first
         window.location.href = 'assessment.html'; 
     }, 1500);
 }
 
-// Used in Course Dashboard
+function finishAssessment() {
+    localStorage.setItem('new_deck_created', 'true');
+    localStorage.setItem('assessed_difficulty', 'Hard'); 
+
+    const formatSelect = document.getElementById('gen-format-select');
+    const format = formatSelect ? formatSelect.value : 'flashcard';
+
+    if (format === 'quiz') {
+        window.location.href = 'quiz.html';
+    } else {
+        window.location.href = 'flashcard-generated.html';
+    }
+}
+
+function openStudySelection() {
+    document.getElementById('study-mode-modal').style.display = 'flex';
+}
+
+function closeStudySelection() {
+    document.getElementById('study-mode-modal').style.display = 'none';
+}
+
+function goToStudyMode(mode) {
+    if (mode === 'quiz') {
+        window.location.href = 'quiz.html';
+    } else {
+        window.location.href = 'flashcard-generated.html';
+    }
+}
+
 function generateAndLaunch() {
     const btn = document.querySelector('.btn-launch-course');
     if(btn) {
@@ -165,31 +162,6 @@ function generateAndLaunch() {
     }, 1500);
 }
 
-/* Update this specific function in script.js */
-
-function finishAssessment() {
-    // Save flag
-    localStorage.setItem('new_deck_created', 'true');
-    localStorage.setItem('assessed_difficulty', 'Hard'); 
-
-    // CHECK FORMAT SELECTION
-    // We need to grab the value from the modal dropdown. 
-    // Since the modal might be closed, we usually save this state earlier, 
-    // but for the prototype, we can check the element directly if it still exists in DOM.
-    const formatSelect = document.getElementById('gen-format-select');
-    const format = formatSelect ? formatSelect.value : 'flashcard'; // Default to flashcard
-
-    if (format === 'quiz') {
-        window.location.href = 'quiz.html';
-    } else {
-        window.location.href = 'flashcard-generated.html';
-    }
-}
-// ==========================================
-// PART 5: FLASHCARD ENGINE
-// ==========================================
-
-// Deck 1: Neuroscience (Default)
 const flashcardData = [
     { question: "What is the primary function of a dendrite?", answer: "Dendrites receive synaptic inputs from axons.", difficulty: "Medium", tags: ["Neuron"], aiExplanation: "Think of dendrites like antennae catching signals." },
     { question: "What is the Myelin Sheath?", answer: "Insulating layer that speeds up electrical impulses.", difficulty: "Easy", tags: ["Structure"], aiExplanation: "Like rubber coating on a wire." },
@@ -198,7 +170,6 @@ const flashcardData = [
     { question: "Function of Glial Cells?", answer: "Support and protect neurons.", difficulty: "Medium", tags: ["Support"], aiExplanation: "The pit crew for the neuron race cars." }
 ];
 
-// Deck 2: JavaScript (Generated)
 const generatedFlashcardData = [
     { question: "What is a Promise?", answer: "An object representing the eventual completion or failure of an async operation.", difficulty: "Hard", tags: ["JS", "Async"], aiExplanation: "It's like ordering food. You get a buzzer (Promise) that rings when the food is ready (Resolved)." },
     { question: "What is Scope?", answer: "The current context of execution dealing with accessibility of variables.", difficulty: "Medium", tags: ["JS", "Basics"], aiExplanation: "Scope determines where you can see or use a variable." },
@@ -209,10 +180,9 @@ const generatedFlashcardData = [
 
 let currentCardIndex = 0;
 let stats = { mastered: 0, review: 0 };
-let currentDeckData = flashcardData; // Default to Neuro deck
+let currentDeckData = flashcardData; 
 
 function loadCard(index, dataSet) {
-    // If a dataset is passed, use it. Otherwise default to current.
     if (dataSet) currentDeckData = dataSet;
     
     const totalCards = currentDeckData.length;
@@ -226,22 +196,18 @@ function loadCard(index, dataSet) {
     const card = document.getElementById('main-flashcard');
     const aiContainer = document.getElementById('inline-ai-container');
     
-    // Safety check
     if (!card) return;
 
-    // Reset UI state
     card.classList.remove('flipped');
     if (aiContainer) { 
         aiContainer.style.display = 'none'; 
         aiContainer.innerHTML = ''; 
     }
 
-    // Inject Content
     document.getElementById('question-text').innerText = data.question;
     document.getElementById('answer-text').innerText = data.answer;
     document.getElementById('difficulty-pill').innerText = data.difficulty;
     
-    // Update Tags
     const tagsContainer = document.getElementById('tags-container');
     if (tagsContainer) {
         tagsContainer.innerHTML = data.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
@@ -274,7 +240,7 @@ function flipCard(cardElement) {
 }
 
 function handleRating(type, event) {
-    event.stopPropagation(); // Prevent card flip
+    event.stopPropagation();
     if (type === 'master') {
         stats.mastered++;
     } else {
@@ -285,8 +251,6 @@ function handleRating(type, event) {
 }
 
 function showDeckComplete() {
-    // SAVE PROGRESS TO LOCAL STORAGE
-    // Only save "neuro_progress" if we are on the main deck, not the generated one
     if (!window.location.pathname.includes('flashcard-generated.html')) {
         localStorage.setItem('neuro_progress', '100');
     }
@@ -327,7 +291,6 @@ function showInlineAI(event) {
     }
 }
 
-// --- CHATBOT LOGIC ---
 function toggleChatWindow() {
     const chatWindow = document.getElementById('chat-window');
     if (chatWindow) chatWindow.classList.toggle('active');
@@ -339,7 +302,6 @@ function sendChat(type) {
     let userText = input.value;
     let aiResponse = "";
 
-    // Predefined Responses based on Button Click
     if (type === 'explain') {
         userText = "Can you explain this card?";
         aiResponse = "Sure! This concept refers to the core building block of the topic. Think of it like a fundamental rule that allows other parts to function.";
@@ -347,27 +309,23 @@ function sendChat(type) {
         userText = "Give me a real-world example.";
         aiResponse = "Imagine you are mailing a letter. The envelope is like the variable 'scope' - it keeps the contents safe inside and separates it from the outside world.";
     } else {
-        // Generic response for typing
         if(!userText) return;
         aiResponse = "That's a great question. Based on your current progress, I recommend reviewing the previous card on definitions to clarify this.";
     }
 
-    // Append User Message
     const userMsg = document.createElement('div');
     userMsg.className = 'chat-message user';
     userMsg.innerText = userText;
     userMsg.style.cssText = "align-self: flex-end; background: #7c3aed; color: white; border-bottom-right-radius: 2px;";
     body.appendChild(userMsg);
 
-    // Simulate Typing Delay
     setTimeout(() => {
         const aiMsg = document.createElement('div');
         aiMsg.className = 'chat-message ai';
         aiMsg.innerHTML = `<i class="fas fa-robot" style="margin-right:5px; color:#7c3aed;"></i> ${aiResponse}`;
         body.appendChild(aiMsg);
-        body.scrollTop = body.scrollHeight; // Auto scroll
+        body.scrollTop = body.scrollHeight; 
     }, 800);
 
     input.value = "";
 }
-
