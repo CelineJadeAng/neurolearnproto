@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NeuroLearn - Initial Assessment</title>
+    <link rel="stylesheet" href="neurolearn.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #f3f4f6; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        
+        .assess-container {
+            background: white;
+            width: 100%;
+            max-width: 700px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            min-height: 500px;
+        }
+
+        .assess-header {
+            background: #0f766e; /* Teal */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .assess-body {
+            padding: 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .assess-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #111;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Question Slides */
+        .question-slide {
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.4s ease;
+        }
+        .question-slide.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .q-text {
+            font-size: 18px;
+            color: #374151;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        /* Input Styles */
+        .q-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.2s;
+        }
+        .q-input:focus { border-color: #0f766e; }
+
+        /* Multiple Choice Styles */
+        .mc-options { display: flex; flex-direction: column; gap: 10px; }
+        .mc-option {
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+            color: #4b5563;
+        }
+        .mc-option:hover { background: #f0fdfa; border-color: #ccfbf1; }
+        .mc-option.selected { background: #e0f2f1; border-color: #0f766e; color: #0f766e; font-weight: bold; }
+
+        /* Footer / Progress */
+        .progress-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .p-bar-bg {
+            flex: 1;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            margin: 0 20px;
+        }
+
+        .p-bar-fill {
+            height: 100%;
+            width: 20%;
+            background: #0f766e;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .btn-next {
+            background: #0f766e;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .btn-next:hover { background: #0d5f57; }
+
+    </style>
+</head>
+<body>
+
+    <div class="assess-container">
+        
+        <div class="assess-header">
+            <span><i class="fas fa-brain"></i> NeuroLearn Assessment</span>
+            <span style="font-size: 12px; opacity: 0.9; background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 4px;">AI Mode: Active</span>
+        </div>
+
+        <div class="assess-body">
+            
+            <h2 class="assess-title" id="title-text">Question 1 of 5</h2>
+
+            <div class="question-slide active" id="q1">
+                <p class="q-text">Which object represents the eventual completion (or failure) of an asynchronous operation and its resulting value?</p>
+                <div class="mc-options">
+                    <div class="mc-option" onclick="selectOption(this)">A. Function</div>
+                    <div class="mc-option" onclick="selectOption(this)">B. Promise</div>
+                    <div class="mc-option" onclick="selectOption(this)">C. JSON</div>
+                    <div class="mc-option" onclick="selectOption(this)">D. Array</div>
+                </div>
+            </div>
+
+            <div class="question-slide" id="q2">
+                <p class="q-text">To wait for a Promise to resolve inside an async function, you use the keyword __________.</p>
+                <input type="text" class="q-input" placeholder="Type your answer...">
+            </div>
+
+            <div class="question-slide" id="q3">
+                <p class="q-text">Which state is NOT a valid state for a Promise?</p>
+                <div class="mc-options">
+                    <div class="mc-option" onclick="selectOption(this)">A. Pending</div>
+                    <div class="mc-option" onclick="selectOption(this)">B. Fulfilled</div>
+                    <div class="mc-option" onclick="selectOption(this)">C. Rejected</div>
+                    <div class="mc-option" onclick="selectOption(this)">D. Delayed</div>
+                </div>
+            </div>
+
+            <div class="question-slide" id="q4">
+                <p class="q-text">The method used to handle errors in a Promise chain is called .__________().</p>
+                <input type="text" class="q-input" placeholder="e.g., .finish()">
+            </div>
+
+            <div class="question-slide" id="q5">
+                <p class="q-text">What happens if you await a non-promise value?</p>
+                <div class="mc-options">
+                    <div class="mc-option" onclick="selectOption(this)">A. It throws an error</div>
+                    <div class="mc-option" onclick="selectOption(this)">B. It waits forever</div>
+                    <div class="mc-option" onclick="selectOption(this)">C. It resolves immediately with that value</div>
+                    <div class="mc-option" onclick="selectOption(this)">D. It converts it to null</div>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <div style="font-size: 13px; color: #6b7280; width: 100px;">Adaptive Level: <strong style="color:#0f766e">Medium</strong></div>
+                <div class="p-bar-bg">
+                    <div class="p-bar-fill" id="progress-bar" style="width: 20%;"></div>
+                </div>
+                <button class="btn-next" id="next-btn" onclick="nextSlide()">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 5;
+
+        function selectOption(element) {
+            // Remove selected class from siblings
+            const parent = element.parentElement;
+            const siblings = parent.getElementsByClassName('mc-option');
+            for (let i = 0; i < siblings.length; i++) {
+                siblings[i].classList.remove('selected');
+            }
+            // Add to clicked
+            element.classList.add('selected');
+        }
+
+        function nextSlide() {
+            const btn = document.getElementById('next-btn');
+
+            if (currentSlide < totalSlides) {
+                // Hide current
+                document.getElementById('q' + currentSlide).classList.remove('active');
+                
+                // Increment
+                currentSlide++;
+                
+                // Show next
+                document.getElementById('q' + currentSlide).classList.add('active');
+                
+                // Update Title & Progress
+                document.getElementById('title-text').innerText = `Question ${currentSlide} of ${totalSlides}`;
+                document.getElementById('progress-bar').style.width = (currentSlide / totalSlides * 100) + '%';
+
+                // If last slide, change button text
+                if (currentSlide === totalSlides) {
+                    btn.innerText = "Finish Assessment";
+                }
+            } else {
+                // FINISH LOGIC
+                btn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Calculating Score...`;
+                
+                // Call the main script function (which you added earlier)
+                setTimeout(() => {
+                    finishAssessment(); 
+                }, 1500);
+            }
+        }
+    </script>
+
+</body>
+</html>

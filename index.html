@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moodle Log in</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="login-top-bar">
+        <div class="lang-selector">English (United States) (en_us) ▼</div>
+        <div style="font-size: 20px;">▦</div>
+    </div>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+            
+            <div class="moodle-logo">
+                <span>🎓 Moodle</span> 
+            </div>
+
+            <h1 class="login-title">Log in</h1>
+
+            <form onsubmit="fakeLogin(event)">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" value="student_test">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" value="password">
+                </div>
+                
+                <a href="#" class="forgot-pass">Lost password?</a>
+
+                <button type="submit" class="btn-primary">Log in</button>
+            </form>
+
+            <div class="login-using">
+                <p>Login using:</p>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn">
+                        <span style="color:#DB4437; font-weight:bold;">G</span> Google
+                    </a>
+                    <a href="#" class="social-btn">
+                        <span style="color:#F25022; font-weight:bold;">⊞</span> Microsoft
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="help-btn">?</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

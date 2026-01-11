@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study: JavaScript Promises</title>
+    <link rel="stylesheet" href="flashcard-study.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="fc-header">
+        <div class="fc-nav-left">
+            <button class="back-btn" onclick="window.location.href='neurolearn.html'">
+                <i class="fas fa-chevron-left"></i> Back to Decks
+            </button>
+        </div>
+        <div class="fc-nav-center"></div>
+        <div class="fc-nav-right">
+            <div class="adaptive-badge"><i class="fas fa-brain"></i> Adaptive Mode</div>
+        </div>
+    </header>
+
+    <div class="study-container">
+        
+        <div class="deck-info-bar">
+            <h2 class="deck-title">JavaScript Promises & Async</h2>
+            <div class="counter" id="card-counter">1 / 5</div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-fill" id="progress-bar" style="width: 20%;"></div>
+        </div>
+
+        <div class="card-area">
+            <div class="level-pill" id="difficulty-pill">Hard Level</div>
+
+            <div class="flashcard" id="main-flashcard" onclick="flipCard(this)">
+                
+                <div class="card-face card-front">
+                    <div class="card-label">QUESTION</div>
+                    <h1 class="card-text" id="question-text">Loading...</h1>
+                    <div class="click-hint">Click to reveal answer</div>
+                </div>
+
+                <div class="card-face card-back">
+                    <div class="card-label">ANSWER</div>
+                    <p class="card-answer-text" id="answer-text">Loading...</p>
+                    
+                    <div id="inline-ai-container" style="display: none;"></div>
+
+                    <div class="card-tags" id="tags-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-bar" id="action-buttons">
+            <div class="rating-buttons">
+                <button class="rate-btn review" onclick="handleRating('review', event)">
+                    <i class="far fa-thumbs-down"></i> Need Review
+                </button>
+                <button class="rate-btn master" onclick="handleRating('master', event)">
+                    <i class="far fa-thumbs-up"></i> I Know This
+                </button>
+            </div>
+            <button class="ai-tutor-btn" onclick="showInlineAI(event)">
+                <i class="fas fa-sparkles"></i> Ask AI Tutor for Explanation
+            </button>
+        </div>
+    </div>
+
+    <div class="chat-fab" onclick="toggleChatWindow()">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="session-stats">
+        <div class="stats-header">Session Stats</div>
+        <div class="stat-row">
+            <span>Mastered</span>
+            <span class="stat-num green" id="stat-mastered">0</span>
+        </div>
+        <div class="stat-row">
+            <span>Review</span>
+            <span class="stat-num orange" id="stat-review">0</span>
+        </div>
+        <div class="stat-row">
+            <span>Remaining</span>
+            <span class="stat-num gray" id="stat-remaining">5</span>
+        </div>
+    </div>
+
+    <div class="ai-chat-window" id="chat-window">
+        <div class="chat-header">
+            <span>🤖 NeuroLearn AI Tutor</span>
+            <button class="close-chat" onclick="toggleChatWindow()">✕</button>
+        </div>
+        <div class="chat-body">
+             <div class="chat-message ai">
+                Hello! I've generated a new deck on <strong>JavaScript Promises</strong> for you. Ask me if you get stuck!
+            </div>
+        </div>
+        
+        <div class="quick-actions" style="padding: 10px; background: white; display: flex; gap: 10px; border-top: 1px solid #eee;">
+            <button onclick="sendChat('explain')" style="flex:1; padding: 8px; border: 1px solid #e0b0ff; background: #fdfaff; color: #7c3aed; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold;">
+                <i class="far fa-lightbulb"></i> Explain
+            </button>
+            <button onclick="sendChat('example')" style="flex:1; padding: 8px; border: 1px solid #e0b0ff; background: #fdfaff; color: #7c3aed; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold;">
+                <i class="fas fa-code"></i> Example
+            </button>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" placeholder="Ask a follow-up...">
+            <button class="send-btn" onclick="sendChat('custom')"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

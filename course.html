@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course View</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="app-header">
+        <div style="font-size: 20px; font-weight: bold;">☰ Tnoodle</div>
+        <div>Rachel Aranas (Student)</div>
+    </header>
+
+    <div class="layout-flex">
+        <nav class="sidebar">
+            <a href="dashboard.html" class="nav-item">← Dashboard</a>
+            <div style="padding:10px; font-weight:bold;">Neuroscience 101</div>
+            <a href="#" class="nav-item">General</a>
+            <a href="#" class="nav-item">Topic 1</a>
+            <a href="#" class="nav-item">Topic 2</a>
+            <a href="#" class="nav-item active">Topic 3: Brain Anatomy</a>
+        </nav>
+
+        <main class="main-content">
+            <h1 style="color:#0f6cb5;">Neuroscience 101</h1>
+            <div class="breadcrumb">Dashboard / Courses / Neuro101 / Topic 3</div>
+
+            <div style="margin-top: 30px;">
+                <h3 style="border-bottom: 1px solid #ddd; padding-bottom: 10px; color:#f98012;">Week 4: Activities</h3>
+                
+                <div class="activity-card" onclick="launchApp()">
+                    <div style="width:40px; height:40px; background:#222; border-radius:5px; margin-right:15px; display:flex; align-items:center; justify-content:center; color:#00d2ff; font-weight:bold;">🧠</div>
+                    <div>
+                        <div style="font-weight:bold; color:#0f6cb5; font-size:16px;">NeuroLearn Flashcards: Brain Anatomy (LTI)</div>
+                        <div style="font-size:12px; color:#666;">External Learning Tool • Adaptive Mode</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>

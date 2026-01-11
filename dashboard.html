@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moodle</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Specific override to match the screenshot chevron icons */
+        .chevron {
+            color: #0f6cb5;
+            background: #e7f1ff;
+            width: 24px; 
+            height: 24px;
+            border-radius: 4px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="sb-header">
+        <div class="sb-left">
+            <a href="#" class="sb-brand">Moodle</a> <a href="#" class="sb-nav-link">Home</a>
+            <a href="#" class="sb-nav-link">Calendar</a>
+        </div>
+        <div class="sb-right">
+            <span class="search-icon">🔍</span>
+            <span>English (United States) (en_us) ▼</span>
+            <span> (Student Name)</span> 
+        </div>
+    </header>
+
+    <div class="sb-layout">
+        <aside class="sb-sidebar">
+            <div class="sidebar-header">
+                <button class="close-btn">✕</button>
+                <span style="font-weight: bold; color: #333;">⋮</span>
+            </div>
+
+            <a href="#" class="sb-menu-item active">
+                <span class="sb-arrow">▼</span> General
+            </a>
+            
+            <div style="margin-left: 20px;">
+                <a href="#" class="sb-menu-item" style="font-size: 13px;">
+                    💬 News forum
+                </a>
+            </div>
+
+            <a href="#" class="sb-menu-item"><span class="sb-arrow">▶</span> Topic 1</a>
+            <a href="#" class="sb-menu-item"><span class="sb-arrow">▶</span> Topic 2</a>
+            <a href="#" class="sb-menu-item"><span class="sb-arrow">▶</span> Topic 3</a>
+            <a href="#" class="sb-menu-item"><span class="sb-arrow">▶</span> Topic 4: Neural Pathways</a>
+        </aside>
+
+        <main class="sb-content">
+            <h1 class="course-title">Neuroscience 101</h1>
+
+            <a class="collapse-link">Collapse all</a>
+            <div style="clear: both;"></div>
+
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-title-row">
+                        <div class="chevron">▼</div>
+                        <span class="topic-name">General</span>
+                    </div>
+                </div>
+                <div class="topic-body open">
+                    <div style="display:flex; align-items:center; gap:10px; padding-top:10px;">
+                        <span style="color:#f98012; font-size:20px;">💬</span>
+                        <a href="#" style="color:#333; text-decoration:none;">News forum</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-title-row">
+                        <div class="chevron" style="background:#f2f2f2; color:#555;">▶</div>
+                        <span class="topic-name">Topic 1</span>
+                    </div>
+                </div>
+            </div>
+
+             <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-title-row">
+                        <div class="chevron" style="background:#f2f2f2; color:#555;">▶</div>
+                        <span class="topic-name">Topic 2</span>
+                    </div>
+                </div>
+            </div>
+
+           <div class="topic-card">
+    <div class="topic-header">
+        <div class="topic-title-row">
+            <div class="chevron">▶</div> 
+            <span class="topic-name">Topic 4: Neural Pathways</span>
+        </div>
+    </div>
+    
+    <div class="topic-body">
+        
+        <div style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-top: 15px;">
+            <a href="lesson.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px; color: #333;">
+                <div style="width: 30px; height: 30px; background: #f98012; border-radius: 4px; display: flex; justify-content: center; align-items: center; color: white; font-size: 14px;">📄</div>
+                <div>
+                    <div style="font-weight: 500; color: #0f6cb5;">Lesson 1: Introduction to Neurons</div>
+                    <div style="font-size: 12px; color: #666;">Read content • Video available</div>
+                </div>
+            </a>
+        </div>
+
+        <a href="#" onclick="launchApp()" class="lti-link-row">
+            <div style="width:36px; height:36px; background:#222; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:18px;">🧠</div>
+            <div>
+                <div style="color:#0f6cb5; font-weight:500;">NeuroLearn Flashcards: Brain Anatomy (LTI)</div>
+                <div style="font-size:12px; color:#666;">External Tool</div>
+            </div>
+        </a>
+
+    </div>
+</div>
+
+        </main>
+
+        <div class="right-drawer-toggle">﹤</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

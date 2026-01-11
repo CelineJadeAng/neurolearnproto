@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz: JavaScript Promises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Moodle Quiz Style Replica */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            color: #333;
+        }
+
+        /* Top Bar */
+        .moodle-header {
+            background: white;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #0f6cb5;
+        }
+        .breadcrumb { color: #666; margin-right: 10px; }
+        .breadcrumb span { margin: 0 5px; color: #999; }
+
+        /* Main Layout */
+        .quiz-layout {
+            display: flex;
+            max-width: 1200px;
+            margin: 30px auto;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        /* Left Column (Question) */
+        .question-column { flex: 1; }
+
+        .quiz-title {
+            font-size: 24px;
+            font-weight: normal;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-btn {
+            padding: 6px 12px;
+            background: #ced4da;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Question Container */
+        .question-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .q-info-box {
+            width: 120px;
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #666;
+            height: fit-content;
+        }
+        .q-num { font-size: 16px; font-weight: bold; color: #0f6cb5; margin-bottom: 10px; display: block; }
+        .flag-q { margin-top: 15px; display: flex; align-items: center; gap: 5px; color: #333; cursor: pointer; }
+
+        .q-content-box {
+            flex: 1;
+            background: #e7f3f5; /* Light blue Moodle quiz bg */
+            border: 1px solid #b8dce3;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        .q-text {
+            font-size: 16px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Multiple Choice Options */
+        .mc-option {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .mc-option input[type="radio"] { transform: scale(1.2); cursor: pointer; }
+
+        /* Next Button */
+        .quiz-nav-btn {
+            margin-top: 30px;
+            text-align: right;
+        }
+        .btn-next {
+            background: #0f6cb5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-next:hover { background: #0c5691; }
+
+        /* Right Column (Navigation) */
+        .nav-column { width: 250px; }
+
+        .nav-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        .nav-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .user-block {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+        .user-avatar { width: 30px; height: 30px; border-radius: 50%; }
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .q-grid-item {
+            height: 35px;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+            background: white;
+            border-radius: 2px;
+        }
+        
+        .q-grid-item.active { border-width: 2px; }
+        .q-grid-item.done { background: #ced4da; color: #555; }
+
+        .finish-link {
+            display: block;
+            margin-top: 20px;
+            color: #0f6cb5;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .finish-link:hover { text-decoration: underline; }
+
+        /* Help Icon */
+        .help-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background: #ced4da;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="moodle-header">
+        <div class="breadcrumb">
+            NeuroLearn <span>/</span> My courses <span>/</span> JS101 <span>/</span> General <span>/</span> Quiz: JavaScript Promises
+        </div>
+    </div>
+
+    <div class="quiz-layout">
+        
+        <div class="question-column">
+            
+            <div class="quiz-title">
+                <i class="fas fa-tasks" style="color: #f98012;"></i> 
+                Quiz: JavaScript Promises & Async
+            </div>
+
+            <button class="back-btn" onclick="window.location.href='neurolearn.html'">Back</button>
+
+            <div class="question-container">
+                
+                <div class="q-info-box">
+                    <span class="q-num" id="q-number-display">Question 1</span>
+                    Not yet answered<br>
+                    Marked out of 1.00<br>
+                    <div class="flag-q"><i class="far fa-flag"></i> Flag question</div>
+                </div>
+
+                <div class="q-content-box">
+                    <div class="q-text" id="quiz-question-text">
+                        Loading Question...
+                    </div>
+
+                    <div id="quiz-options">
+                        </div>
+
+                </div>
+            </div>
+
+            <div class="quiz-nav-btn">
+                <button class="btn-next" onclick="nextQuizQuestion()">Next page</button>
+            </div>
+
+        </div>
+
+        <div class="nav-column">
+            <div class="nav-card">
+                <div class="nav-title">Quiz navigation</div>
+                
+                <div class="user-block">
+                    <img src="https://ui-avatars.com/api/?name=Rachel+Aranas&background=random" class="user-avatar">
+                    Rachel Aranas
+                </div>
+
+                <div class="quiz-grid">
+                    <a href="#" class="q-grid-item active">1</a>
+                    <a href="#" class="q-grid-item">2</a>
+                    <a href="#" class="q-grid-item">3</a>
+                    <a href="#" class="q-grid-item">4</a>
+                    <a href="#" class="q-grid-item">5</a>
+                </div>
+
+                <a href="#" class="finish-link">Finish attempt ...</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="help-bubble">?</div>
+
+    <script>
+        // --- QUIZ LOGIC (Embedded for simplicity in this file) ---
+        
+        // Re-using the same generated data from script.js logic
+        const quizData = [
+            { 
+                q: "What is a Promise in JavaScript?", 
+                options: ["A guaranteed synchronous function", "An object representing eventual completion/failure of an async op", "A loop that never ends", "A variable type for integers"] 
+            },
+            { 
+                q: "Which keyword pauses the execution of an async function?", 
+                options: ["stop", "pause", "await", "defer"] 
+            },
+            { 
+                q: "What are the three states of a Promise?", 
+                options: ["Pending, Fulfilled, Rejected", "Start, Run, Stop", "True, False, Null", "Waiting, Running, Done"] 
+            },
+            { 
+                q: "What is the DOM?", 
+                options: ["Document Object Model", "Data Oriented Module", "Digital Online Maker", "Direct Object Mapping"] 
+            },
+            { 
+                q: "Which keyword is used to handle errors in a try...catch block?", 
+                options: ["error", "catch", "except", "handle"] 
+            }
+        ];
+
+        let currentQIndex = 0;
+
+        function loadQuizQuestion(index) {
+            if (index >= quizData.length) {
+                alert("Quiz Finished! Returning to dashboard.");
+                window.location.href = 'neurolearn.html';
+                return;
+            }
+
+            const data = quizData[index];
+            document.getElementById('q-number-display').innerText = "Question " + (index + 1);
+            document.getElementById('quiz-question-text').innerText = data.q;
+
+            const optsDiv = document.getElementById('quiz-options');
+            optsDiv.innerHTML = ""; // Clear old
+
+            data.options.forEach((opt, i) => {
+                optsDiv.innerHTML += `
+                    <label class="mc-option">
+                        <input type="radio" name="q_option">
+                        <span>${String.fromCharCode(97 + i)}. ${opt}</span>
+                    </label>
+                `;
+            });
+
+            // Update Grid
+            const gridItems = document.querySelectorAll('.q-grid-item');
+            gridItems.forEach(item => item.classList.remove('active'));
+            if(gridItems[index]) gridItems[index].classList.add('active');
+            
+            // Mark previous as done
+            if(index > 0) gridItems[index-1].classList.add('done');
+        }
+
+        function nextQuizQuestion() {
+            currentQIndex++;
+            loadQuizQuestion(currentQIndex);
+        }
+
+        // Initialize
+        window.onload = function() {
+            loadQuizQuestion(0);
+        }
+    </script>
+
+</body>
+</html>

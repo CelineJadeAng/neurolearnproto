@@ -1,0 +1,335 @@
+/* styles.css - Updated for Sandbox 5.1 Look */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: white; /* The screenshot shows a white background */
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* --- New Header Style (White) --- */
+.sb-header {
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.sb-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.sb-brand {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+}
+
+.sb-nav-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.sb-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.search-icon {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* --- Layout Container --- */
+.sb-layout {
+    display: flex;
+    min-height: calc(100vh - 81px); /* Header height adjustment */
+    position: relative;
+}
+
+/* --- Sidebar (Left Drawer) --- */
+.sb-sidebar {
+    width: 280px;
+    background: white;
+    padding: 20px 10px;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px 20px 10px;
+}
+
+.close-btn {
+    font-size: 20px;
+    cursor: pointer;
+    color: #777;
+    background: none;
+    border: none;
+}
+
+.sb-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    color: #555;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 4px; /* Slightly rounded */
+    margin-bottom: 2px;
+}
+
+.sb-menu-item:hover {
+    background-color: #f0f0f0;
+}
+
+.sb-menu-item.active {
+    background-color: #0f6cb5; /* Moodle Blue */
+    color: white;
+    font-weight: 500;
+}
+
+.sb-menu-item.active:hover {
+    background-color: #0c5691;
+}
+
+.sb-arrow {
+    margin-right: 10px;
+    font-size: 10px;
+}
+
+/* --- Main Content --- */
+.sb-content {
+    flex: 1;
+    padding: 30px 40px;
+    max-width: 900px; /* Keep content from stretching too wide */
+}
+
+.course-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* --- Topic Cards --- */
+.topic-card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px; /* Rounded corners like screenshot */
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.topic-header {
+    padding: 15px 20px;
+    background: white; /* Screenshot shows white headers */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+}
+
+.topic-header:hover {
+    background-color: #f8f9fa;
+}
+
+.topic-title-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.topic-icon-box {
+    width: 30px; 
+    height: 30px; 
+    background: #e9ecef; 
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0f6cb5;
+}
+
+.topic-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+.collapse-link {
+    float: right;
+    color: #0f6cb5;
+    font-size: 13px;
+    text-decoration: none;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+/* Content inside the card */
+.topic-body {
+    padding: 0 20px 20px 20px;
+    border-top: 1px solid #f0f0f0;
+    display: none; /* Hidden by default for collapsed items */
+}
+
+.topic-body.open {
+    display: block;
+}
+
+/* The LTI Link styling within the card */
+.lti-link-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.2s;
+}
+
+.lti-link-row:hover {
+    background-color: #edf6fb; /* Light blue hover */
+}
+
+/* Right toggle button */
+.right-drawer-toggle {
+    position: fixed;
+    right: 0;
+    top: 100px;
+    background: #e9ecef;
+    width: 20px;
+    height: 40px;
+    border-radius: 4px 0 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #555;
+}
+
+/* --- Re-adding Login CSS here to keep file unified --- */
+.login-top-bar { position: absolute; top: 0; right: 0; padding: 15px; display: flex; gap: 15px; align-items: center; font-size: 14px; color: #555; }
+.login-wrapper { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #f2f2f2; }
+.login-card { background: white; padding: 30px; width: 100%; max-width: 340px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.moodle-logo span { color: #f98012; font-weight: bold; font-size: 24px; }
+.btn-primary { width: 100%; padding: 10px; background-color: #0f6cb5; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+.form-control { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #8f959e; border-radius: 4px; box-sizing: border-box; }
+/* --- New Styles for Lesson Page (Mount Orange Style) --- */
+.lesson-layout {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.mo-nav {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.mo-nav a { text-decoration: none; color: #333; }
+.mo-nav a.active { border-bottom: 2px solid #0f6cb5; padding-bottom: 5px; font-weight: 500; }
+
+.breadcrumb-trail {
+    font-size: 13px;
+    color: #0f6cb5;
+    margin-bottom: 20px;
+}
+
+.lesson-title-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.lesson-icon {
+    font-size: 24px;
+    color: #f98012; /* Orange icon color */
+}
+
+.todo-tag {
+    display: inline-block;
+    background: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.content-block {
+    background: white; /* Clean background */
+    margin-bottom: 30px;
+}
+
+.hero-image-placeholder {
+    width: 100%;
+    height: 250px;
+    background-color: #eee;
+    background-image: url('https://placehold.co/600x400/e0e0e0/999999?text=Neuron+Structure+Image');
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.gray-btn {
+    background: #e9ecef;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+    font-weight: 500;
+}
+
+.gray-btn:hover { background: #dde2e6; }
+
+/* The Special NeuroLearn Button */
+.neuro-btn {
+    background: linear-gradient(135deg, #00d2ff 0%, #0f6cb5 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(15, 108, 181, 0.3);
+    transition: transform 0.2s;
+}
+
+.neuro-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(15, 108, 181, 0.4);
+}
